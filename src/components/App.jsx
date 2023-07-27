@@ -1,34 +1,62 @@
+import { Routes, Route } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-
-import { selectLoading, selectError } from 'redux/сontacts/contactsSelectors';
-import { fetchContacts } from 'redux/сontacts/contactsOperation';
-
-import { Section } from './Section/Section';
-import { ContactForm } from './ContactForm/ContactForm';
-import { Filter } from './Filter/Filter';
-import { ContactList } from './ContactsList/ContactsList';
-
+import { HomePage } from 'pages/HomePage/HomePage';
+import { ContactsPage } from 'pages/ContactsPage/ContactsPage';
+import { LoginPage } from 'pages/LoginPage/LoginPage';
+import { RegisterPage } from 'pages/RegisterPage/RegisterPage';
+import { Layout } from './Layout/Layout';
+import { fetchCurrentUser } from 'redux/auth/authOperations';
+import { selectIsFetchingCurrentUser } from 'redux/auth/authSelectors';
+import { PublicRoute } from 'hoocs/PublicRoute';
+import { PrivateRoute } from 'hoocs/PrivateRoute';
 export const App = () => {
-  const isLoading = useSelector(selectLoading);
-  const error = useSelector(selectError);
+  const isFetchingCurrentUser = useSelector(selectIsFetchingCurrentUser);
   const dispatch = useDispatch();
-
   useEffect(() => {
-    dispatch(fetchContacts());
+    dispatch(fetchCurrentUser());
   }, [dispatch]);
 
   return (
-    <Section>
-      <h1>Phonebook</h1>
-      <ContactForm />
-      <div>
-        <h2>Contacts</h2>
-        <Filter />
-        {isLoading && <p>Loading...</p>}
-        {error && <p> {error} </p>}
-        {!isLoading && !error && <ContactList />}
-      </div>
-    </Section>
+    <>
+      {!isFetchingCurrentUser && (
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route
+              index
+              element={
+                <PublicRoute>
+                  <HomePage />
+                </PublicRoute>
+              }
+            />
+            <Route
+              path="register"
+              element={
+                <PublicRoute restricted>
+                  <RegisterPage />
+                </PublicRoute>
+              }
+            />
+            <Route
+              path="login"
+              element={
+                <PublicRoute restricted>
+                  <LoginPage />
+                </PublicRoute>
+              }
+            />
+            <Route
+              path="contacts"
+              element={
+                <PrivateRoute>
+                  <ContactsPage />
+                </PrivateRoute>
+              }
+            />
+          </Route>
+        </Routes>
+      )}
+    </>
   );
 };
