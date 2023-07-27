@@ -6,34 +6,75 @@ import {
   fetchCurrentUser,
 } from './authOperations';
 
-import {
-  handleLogIn,
-  handleLogOut,
-  handleRefreshUserFulfilled,
-  handleRefreshUserPending,
-  handleRefreshUserRejected,
-  handleRegister,
-} from './constants';
-
 const initialState = {
-  user: { name: null, email: null },
+  user: {
+    name: '',
+    email: '',
+  },
   token: null,
-  isLoggedIn: false,
-  isRefreshing: false,
+  isLoading: false,
+  error: null,
+  isFetchingCurrentUser: false,
 };
 
 const authSlice = createSlice({
   name: 'auth',
   initialState,
 
-  extraReducers: builder =>
-    builder
-      .addCase(registration.fulfilled, handleRegister)
-      .addCase(login.fulfilled, handleLogIn)
-      .addCase(logout.fulfilled, handleLogOut)
-      .addCase(fetchCurrentUser.pending, handleRefreshUserPending)
-      .addCase(fetchCurrentUser.fulfilled, handleRefreshUserFulfilled)
-      .addCase(fetchCurrentUser.rejected, handleRefreshUserRejected),
+  extraReducers: {
+    [registration.pending]: state => {
+      state.isLoading = true;
+    },
+    [registration.fulfilled]: (state, { payload: { user, token } }) => {
+      state.isLoading = false;
+      state.user = user;
+      state.token = token;
+    },
+    [registration.rejected]: (state, { payload }) => {
+      state.isLoading = false;
+      state.error = payload;
+    },
+    [login.pending]: state => {
+      state.isLoading = true;
+      state.error = null;
+    },
+    [login.fulfilled]: (state, { payload: { user, token } }) => {
+      state.isLoading = false;
+      state.user = user;
+      state.token = token;
+    },
+    [login.rejected]: (state, { payload }) => {
+      state.isLoading = false;
+      state.error = payload;
+    },
+    [logout.pending]: state => {
+      state.isLoading = true;
+    },
+    [logout.fulfilled]: state => {
+      state.isLoading = false;
+      state.user = {
+        name: '',
+        email: '',
+      };
+      state.token = null;
+    },
+    [logout.rejected]: (state, { payload }) => {
+      state.isLoading = false;
+      state.error = payload;
+    },
+    [fetchCurrentUser.pending]: state => {
+      state.isLoading = true;
+    },
+    [fetchCurrentUser.fulfilled]: (state, { payload: { user, token } }) => {
+      state.isLoading = false;
+      state.user = user;
+      state.token = token;
+    },
+    [fetchCurrentUser.rejected]: (state, { payload }) => {
+      state.isLoading = false;
+      state.error = payload;
+    },
+  },
 });
 
 export const authReducer = authSlice.reducer;

@@ -1,3 +1,4 @@
+// import { UserAuthMenu } from 'components/UserAuthMenu/UserAuthMenu';
 // import s from './HomePage.module.scss';
 
 export const HomePage = () => {

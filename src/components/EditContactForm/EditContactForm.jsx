@@ -71,3 +71,7 @@ export const EditContactForm = ({ contact, closeModal }) => {
     </form>
   );
 };
+
+// EditContactForm.propTypes = {
+//   addNewContact: PropTypes.func.isRequired,
+// };

@@ -1,26 +1,25 @@
-import { useSelector, useDispatch } from 'react-redux';
-import { FormField, Field } from './Filter.styled';
-import { filterContacts } from 'redux/filter/filterSlice';
-import { selectFilter } from 'redux/сontacts/contactsSelectors';
+import PropTypes from 'prop-types';
 
-export const Filter = () => {
-  const filter = useSelector(selectFilter);
-  const dispatch = useDispatch();
-  const handleFilterInput = e => {
-    dispatch(filterContacts(e.target.value));
+// import s from '../ContactForm/ContactForm.module.scss';
+
+export const Filter = ({ filtration }) => {
+  const handleFilterInput = ({ target: { value } }) => {
+    filtration(value.toLowerCase());
   };
 
   return (
-    <FormField htmlFor="filter">
+    <label>
       Find contacts by name
-      <Field
-        id="filter"
+      <input
         type="text"
         name="filter"
         required
-        onChange={handleFilterInput}
-        value={filter}
+        onChange={e => handleFilterInput(e)}
       />
-    </FormField>
+    </label>
   );
 };
+
+// Filter.propTypes = {
+//   filtration: PropTypes.func.isRequired,
+// };

@@ -39,6 +39,6 @@ export const Modal = ({ closeModal, param, addNewContact, contact }) => {
   );
 };
 
-Modal.propTypes = {
-  closeModal: PropTypes.func.isRequired,
-};
+// Modal.propTypes = {
+//   closeModal: PropTypes.func.isRequired,
+// };

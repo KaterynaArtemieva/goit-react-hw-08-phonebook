@@ -8,8 +8,8 @@ import { RegisterPage } from 'pages/RegisterPage/RegisterPage';
 import { Layout } from './Layout/Layout';
 import { fetchCurrentUser } from 'redux/auth/authOperations';
 import { selectIsFetchingCurrentUser } from 'redux/auth/authSelectors';
-import { PublicRoute } from 'hoocs/PublicRoute';
-import { PrivateRoute } from 'hoocs/PrivateRoute';
+import { PublicRoute } from 'hooks/PublicRoute';
+import { PrivateRoute } from 'hooks/PrivateRoute';
 export const App = () => {
   const isFetchingCurrentUser = useSelector(selectIsFetchingCurrentUser);
   const dispatch = useDispatch();

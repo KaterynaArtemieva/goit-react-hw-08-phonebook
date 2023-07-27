@@ -1,33 +1,36 @@
-import { useSelector, useDispatch } from 'react-redux';
-import { ContactListSt } from './ContactsList.styled';
-import { ContactSt } from 'components/ContactItem/ContactItem.styled';
-import { deleteContact } from 'redux/сontacts/contactsOperation';
-import { BsTrash } from 'react-icons/bs';
-import { ButtonD } from 'components/Button/Button.styled';
-import { selectFilteredContacts } from 'redux/сontacts/contactsSelectors';
+// import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux';
+import { selectContacts } from 'redux/сontacts/contactsSelectors';
+import { selectFilter } from 'redux/filter/filterSelectors';
+import { Contact } from 'components/ContactItem/ContactItem';
+import { DeleteButton, EditButton } from '../Button/Button';
+// import s from './ContactList.module.scss';
 
-export const ContactList = () => {
-  const contacts = useSelector(selectFilteredContacts);
-  const dispatch = useDispatch();
-  const contactDelete = id => {
-    dispatch(deleteContact(id));
-  };
+export const ContactList = ({ contactDelete, openModal }) => {
+  const contacts = useSelector(selectContacts);
+  const filter = useSelector(selectFilter);
 
   return (
-    <ContactListSt>
-      {contacts.map(contact => (
-        <ContactSt key={contact.id}>
-          <p>{contact.name}: </p>
-          <p>{contact.phone}</p>
-          <ButtonD
-            type="button"
-            name="delete"
-            onClick={() => contactDelete(contact.id)}
-          >
-            <BsTrash size={16} />
-          </ButtonD>
-        </ContactSt>
-      ))}
-    </ContactListSt>
+    <ul>
+      {contacts
+        .filter(contact => contact.name.toLowerCase().includes(filter))
+        .map(contact => (
+          <li key={contact.id}>
+            <Contact contact={contact} />
+            <div>
+              <EditButton
+                type="button"
+                openModal={openModal}
+                contact={contact}
+              />
+              <DeleteButton
+                type="button"
+                contactDelete={contactDelete}
+                contactId={contact.id}
+              />
+            </div>
+          </li>
+        ))}
+    </ul>
   );
 };
