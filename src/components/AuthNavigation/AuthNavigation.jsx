@@ -1,20 +1,22 @@
-import { Link } from 'react-router-dom';
-
-// import s from './AuthNavigation.module.scss';
+import {
+  AuthNavItemSt,
+  AuthNavLinkSt,
+  AuthNavListSt,
+} from './AuthNavigation.styled';
 
 export const AuthNavigation = () => {
   return (
-    <ul>
+    <AuthNavListSt>
       <li>
-        <Link to="/register">
-          <button>Registaration</button>
-        </Link>
+        <AuthNavLinkSt to="/register">
+          <AuthNavItemSt>Registaration</AuthNavItemSt>
+        </AuthNavLinkSt>
       </li>
       <li>
-        <Link to="/login">
-          <button>Login</button>
-        </Link>
+        <AuthNavLinkSt to="/login">
+          <AuthNavItemSt>Login</AuthNavItemSt>
+        </AuthNavLinkSt>
       </li>
-    </ul>
+    </AuthNavListSt>
   );
 };

@@ -1,10 +1,8 @@
-// import PropTypes from 'prop-types';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-
 import { editContact } from 'redux/сontacts/contactsOperation';
 import { SaveButton } from '../Button/Button';
-// import s from './EditContactForm.module.scss';
+import { FormSt, InputSt, LabelSt, TitleSt } from './EditContactForm.styled';
 
 export const EditContactForm = ({ contact, closeModal }) => {
   const [name, setName] = useState(contact.name);
@@ -41,11 +39,11 @@ export const EditContactForm = ({ contact, closeModal }) => {
   };
 
   return (
-    <form onSubmit={e => handleOnSubmit(e)}>
-      <h3>Edit contact</h3>
-      <label>
+    <FormSt onSubmit={e => handleOnSubmit(e)}>
+      <TitleSt>Edit contact</TitleSt>
+      <LabelSt>
         Name
-        <input
+        <InputSt
           value={name}
           type="text"
           name="name"
@@ -54,10 +52,10 @@ export const EditContactForm = ({ contact, closeModal }) => {
           required
           onChange={handleContactInput}
         />
-      </label>
-      <label>
+      </LabelSt>
+      <LabelSt>
         Number
-        <input
+        <InputSt
           value={number}
           type="tel"
           name="number"
@@ -66,12 +64,8 @@ export const EditContactForm = ({ contact, closeModal }) => {
           required
           onChange={handleContactInput}
         />
-      </label>
+      </LabelSt>
       <SaveButton />
-    </form>
+    </FormSt>
   );
 };
-
-// EditContactForm.propTypes = {
-//   addNewContact: PropTypes.func.isRequired,
-// };

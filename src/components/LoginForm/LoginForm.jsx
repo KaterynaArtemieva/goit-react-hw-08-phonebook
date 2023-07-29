@@ -2,8 +2,7 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { login } from '../../redux/auth/authOperations';
 import { AuthButton } from '../Button/Button';
-
-// import s from './LoginForm.module.scss';
+import { FormSt, LabelSt, InputSt } from './LoginForm.styled';
 
 export const LoginForm = () => {
   const [email, setEmail] = useState('');
@@ -30,26 +29,26 @@ export const LoginForm = () => {
     setPassword('');
   };
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
+    <FormSt onSubmit={handleSubmit}>
+      <LabelSt>
         Email:
-        <input
+        <InputSt
           type="email"
           name="email"
           value={email}
           onChange={handleChange}
         />
-      </label>
-      <label>
+      </LabelSt>
+      <LabelSt>
         Password:
-        <input
+        <InputSt
           type="password"
           name="password"
           value={password}
           onChange={handleChange}
         />
-      </label>
+      </LabelSt>
       <AuthButton text={'LogIn'} />
-    </form>
+    </FormSt>
   );
 };

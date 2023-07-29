@@ -1,6 +1,4 @@
-import PropTypes from 'prop-types';
-
-// import s from '../ContactForm/ContactForm.module.scss';
+import { LabelSt, InputSt } from 'components/ContactForm/ContactForm.styled';
 
 export const Filter = ({ filtration }) => {
   const handleFilterInput = ({ target: { value } }) => {
@@ -8,18 +6,14 @@ export const Filter = ({ filtration }) => {
   };
 
   return (
-    <label>
+    <LabelSt>
       Find contacts by name
-      <input
+      <InputSt
         type="text"
         name="filter"
         required
         onChange={e => handleFilterInput(e)}
       />
-    </label>
+    </LabelSt>
   );
 };
-
-// Filter.propTypes = {
-//   filtration: PropTypes.func.isRequired,
-// };

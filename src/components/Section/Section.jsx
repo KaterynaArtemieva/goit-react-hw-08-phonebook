@@ -1,14 +1,8 @@
-import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import { selectToken } from 'redux/auth/authSelectors';
-
-// import s from './Section.module.scss';
+import { SectionSt } from './Section.styled';
 
 export const Section = ({ children }) => {
   const token = useSelector(selectToken);
-  return <>{token && <section> {children}</section>}</>;
+  return <>{token && <SectionSt> {children}</SectionSt>}</>;
 };
-
-// Section.propTypes = {
-//   children: PropTypes.node.isRequired,
-// };

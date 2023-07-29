@@ -1,9 +1,7 @@
 import { nanoid } from 'nanoid';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
-
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-
 import {
   selectContacts,
   selectLoading,
@@ -15,15 +13,12 @@ import {
   deleteContact,
 } from 'redux/сontacts/contactsOperation';
 import { filterContacts } from 'redux/filter/filterSlice';
-
 import { Section } from '../../components/Section/Section';
 import { Filter } from '../../components/Filter/Filter';
 import { ContactList } from 'components/ContactsList/ContactsList';
 import { AddButton } from 'components/Button/Button';
 import { Modal } from 'components/Modal/Modal';
-// import { UserAuthMenu } from 'components/UserAuthMenu/UserAuthMenu';
-
-// import s from '../ContactsPage/ContactPage.module.scss';
+import { ContactsSt, AddButtonBoxSt, TitleSt } from './ContactsPage.styled';
 
 export const ContactsPage = () => {
   const [modalIsOpen, setmodalIsOpen] = useState('');
@@ -68,18 +63,18 @@ export const ContactsPage = () => {
 
   return (
     <Section>
-      <div>
-        <div>
-          <h2>Contacts</h2>
+      <ContactsSt>
+        <AddButtonBoxSt>
+          <TitleSt>Contacts</TitleSt>
           <AddButton type="button" openModal={openModal} />
-        </div>
+        </AddButtonBoxSt>
         <Filter filtration={filtration} />
         {isLoading && <p>Loading...</p>}
         {error && <p> {error} </p>}
         {!isLoading && !error && (
           <ContactList contactDelete={contactDelete} openModal={openModal} />
         )}
-      </div>
+      </ContactsSt>
       {modalIsOpen && (
         <Modal
           closeModal={closeModal}

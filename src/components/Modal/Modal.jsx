@@ -1,10 +1,7 @@
-import PropTypes from 'prop-types';
 import { useEffect } from 'react';
-
 import { EditContactForm } from '../EditContactForm/EditContactForm';
 import { ContactForm } from 'components/ContactForm/ContactForm';
-
-// import s from '../Modal/Modal.module.scss';
+import { OverlaySt, ModalSt } from './Modal.styled';
 
 export const Modal = ({ closeModal, param, addNewContact, contact }) => {
   useEffect(() => {
@@ -27,18 +24,14 @@ export const Modal = ({ closeModal, param, addNewContact, contact }) => {
 
   return (
     <>
-      <div onClick={closeByBackdrop}>
-        <div>
+      <OverlaySt onClick={closeByBackdrop}>
+        <ModalSt>
           {param === 'edit' && (
             <EditContactForm contact={contact} closeModal={closeModal} />
           )}
           {param === 'add' && <ContactForm addNewContact={addNewContact} />}
-        </div>
-      </div>
+        </ModalSt>
+      </OverlaySt>
     </>
   );
 };
-
-// Modal.propTypes = {
-//   closeModal: PropTypes.func.isRequired,
-// };

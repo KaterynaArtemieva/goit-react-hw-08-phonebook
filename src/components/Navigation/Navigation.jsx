@@ -1,28 +1,25 @@
-import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { selectToken } from 'redux/auth/authSelectors';
-import { ReactComponent as AddIcon } from '../../images/logo.svg';
-
-// import s from './Navigation.module.scss';
+import { NavItemSt, NavLinkSt, NavListSt } from './Navigation.styled';
 
 export const Navigation = () => {
   const token = useSelector(selectToken);
   return (
     <nav>
-      <ul>
+      <NavListSt>
         <li>
-          <Link to="/">
-            <AddIcon />
-          </Link>
+          <NavLinkSt to="/">
+            <NavItemSt>Home</NavItemSt>
+          </NavLinkSt>
         </li>
         {token && (
           <li>
-            <Link to="/contacts">
-              <button>Phonebook</button>
-            </Link>
+            <NavLinkSt to="/contacts">
+              <NavItemSt>Phonebook</NavItemSt>
+            </NavLinkSt>
           </li>
         )}
-      </ul>
+      </NavListSt>
     </nav>
   );
 };

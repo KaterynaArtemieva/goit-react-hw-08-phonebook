@@ -1,10 +1,8 @@
-// import { UserAuthMenu } from 'components/UserAuthMenu/UserAuthMenu';
-// import s from './HomePage.module.scss';
-
+import { HomePageBoxSt, HomePagetitleSt } from "./HomePage.styled";
 export const HomePage = () => {
   return (
-    <div>
-      <h1>Welcome in contact's App</h1>
-    </div>
+    <HomePageBoxSt>
+      <HomePagetitleSt>Welcome in contact's App</HomePagetitleSt>
+    </HomePageBoxSt>
   );
 };

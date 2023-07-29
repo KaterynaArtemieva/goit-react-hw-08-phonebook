@@ -3,14 +3,15 @@ import { AppBar } from 'components/AppBar/AppBar';
 
 import { UserAuthMenu } from 'components/UserAuthMenu/UserAuthMenu';
 
-// import s from './Layout.module.scss';
+import { LayoutBoxSt } from './Layout.styled';
+
 
 export const Layout = () => {
   return (
-    <div>
+    <LayoutBoxSt>
       <AppBar />
       <UserAuthMenu />
       <Outlet />
-    </div>
+    </LayoutBoxSt>
   );
 };

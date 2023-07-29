@@ -1,23 +1,22 @@
-// import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import { selectContacts } from 'redux/сontacts/contactsSelectors';
 import { selectFilter } from 'redux/filter/filterSelectors';
 import { Contact } from 'components/ContactItem/ContactItem';
 import { DeleteButton, EditButton } from '../Button/Button';
-// import s from './ContactList.module.scss';
+import { ListSt, ItemSt, ButtonBoxSt } from './ContactsList.styled';
 
 export const ContactList = ({ contactDelete, openModal }) => {
   const contacts = useSelector(selectContacts);
   const filter = useSelector(selectFilter);
 
   return (
-    <ul>
+    <ListSt>
       {contacts
         .filter(contact => contact.name.toLowerCase().includes(filter))
         .map(contact => (
-          <li key={contact.id}>
+          <ItemSt key={contact.id}>
             <Contact contact={contact} />
-            <div>
+            <ButtonBoxSt>
               <EditButton
                 type="button"
                 openModal={openModal}
@@ -28,9 +27,9 @@ export const ContactList = ({ contactDelete, openModal }) => {
                 contactDelete={contactDelete}
                 contactId={contact.id}
               />
-            </div>
-          </li>
+            </ButtonBoxSt>
+          </ItemSt>
         ))}
-    </ul>
+    </ListSt>
   );
 };

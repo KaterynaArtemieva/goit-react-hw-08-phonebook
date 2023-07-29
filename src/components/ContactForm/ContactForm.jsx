@@ -1,8 +1,6 @@
-// import PropTypes from 'prop-types';
 import { useState } from 'react';
-
 import { SaveButton } from '../Button/Button';
-// import s from './ContactForm.module.scss';
+import { FormSt, InputSt, LabelSt, TitleSt } from './ContactForm.styled';
 
 export const ContactForm = ({ addNewContact }) => {
   const [name, setName] = useState('');
@@ -35,11 +33,11 @@ export const ContactForm = ({ addNewContact }) => {
   };
 
   return (
-    <form onSubmit={e => handleOnSubmit(e)}>
-      <h3>Add contact</h3>
-      <label>
+    <FormSt onSubmit={e => handleOnSubmit(e)}>
+      <TitleSt>Add contact</TitleSt>
+      <LabelSt>
         Name
-        <input
+        <InputSt
           value={name}
           type="text"
           name="name"
@@ -48,10 +46,10 @@ export const ContactForm = ({ addNewContact }) => {
           required
           onChange={handleContactInput}
         />
-      </label>
-      <label>
+      </LabelSt>
+      <LabelSt>
         Number
-        <input
+        <InputSt
           value={number}
           type="tel"
           name="number"
@@ -60,12 +58,8 @@ export const ContactForm = ({ addNewContact }) => {
           required
           onChange={handleContactInput}
         />
-      </label>
+      </LabelSt>
       <SaveButton />
-    </form>
+    </FormSt>
   );
 };
-
-// ContactForm.propTypes = {
-//   addNewContact: PropTypes.func.isRequired,
-// };

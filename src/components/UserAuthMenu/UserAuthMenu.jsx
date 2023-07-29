@@ -1,7 +1,6 @@
 import { useSelector } from 'react-redux';
 import { selectUserName, selectUserEmail } from 'redux/auth/authSelectors';
-
-// import s from './UserAuthMenu.module.scss';
+import { UserAuthMenuSt, TextSt } from './UserAuthMenu.styled';
 
 export const UserAuthMenu = () => {
   const name = useSelector(selectUserName);
@@ -10,10 +9,10 @@ export const UserAuthMenu = () => {
   return (
     <>
       {email && (
-        <div>
-          <p>{`Hello ${name}!`}</p>
-          <p>{email}</p>
-        </div>
+        <UserAuthMenuSt>
+          <TextSt>{`Hello ${name}!`}</TextSt>
+          <TextSt>{email}</TextSt>
+        </UserAuthMenuSt>
       )}
     </>
   );
