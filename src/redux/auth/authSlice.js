@@ -63,12 +63,12 @@ const authSlice = createSlice({
       state.error = payload;
     },
     [fetchCurrentUser.pending]: state => {
-      state.isLoading = true;
-    },
-    [fetchCurrentUser.fulfilled]: (state, { payload: { user, token } }) => {
       state.isLoading = false;
-      state.user = user;
-      state.token = token;
+    },
+    [fetchCurrentUser.fulfilled]: (state, { payload: { name, email } }) => {
+      state.isLoading = false;
+      state.user.name = name;
+      state.user.email = email;
     },
     [fetchCurrentUser.rejected]: (state, { payload }) => {
       state.isLoading = false;

@@ -16,6 +16,7 @@ export const App = () => {
   useEffect(() => {
     dispatch(fetchCurrentUser());
   }, [dispatch]);
+  console.log(dispatch(fetchCurrentUser()));
 
   return (
     <>
@@ -52,6 +53,14 @@ export const App = () => {
                 <PrivateRoute>
                   <ContactsPage />
                 </PrivateRoute>
+              }
+            />
+            <Route
+              path="*"
+              element={
+                <PublicRoute>
+                  <HomePage />
+                </PublicRoute>
               }
             />
           </Route>

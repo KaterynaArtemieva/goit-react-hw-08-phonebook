@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { SaveButton } from '../Button/Button';
 import { FormSt, InputSt, LabelSt, TitleSt } from './ContactForm.styled';
 
-export const ContactForm = ({ addNewContact }) => {
+export const ContactForm = ({ addNewContact, closeModal }) => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
@@ -30,6 +30,7 @@ export const ContactForm = ({ addNewContact }) => {
     e.preventDefault();
     addNewContact({ name, number });
     onFormReset();
+    closeModal();
   };
 
   return (

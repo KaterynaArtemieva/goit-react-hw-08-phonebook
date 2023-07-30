@@ -29,7 +29,7 @@ export const Modal = ({ closeModal, param, addNewContact, contact }) => {
           {param === 'edit' && (
             <EditContactForm contact={contact} closeModal={closeModal} />
           )}
-          {param === 'add' && <ContactForm addNewContact={addNewContact} />}
+          {param === 'add' && <ContactForm addNewContact={addNewContact}  closeModal={closeModal}/>}
         </ModalSt>
       </OverlaySt>
     </>
